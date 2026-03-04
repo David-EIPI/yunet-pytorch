@@ -49,3 +49,17 @@ class AnchorGenerator:
     # Clip to image dimensions
         boxes = np.clip(boxes, 0, [ self.im_width, self.im_height, self.im_width, self.im_height])
         return torch.tensor(boxes, dtype=torch.float32)
+
+
+import torchvision
+def find_best_anchor_boxes(
+            t_label : torch.Tensor,
+            anchor_boxes: torch.Tensor,
+            threshold: float) -> list[int]:
+
+    iou_scores = torchvision.ops.box_iou(t_label, anchor_boxes)
+    best_boxes = torch.nonzero(iou_scores > threshold, as_tuple = True)[1]
+    if best_boxes.shape[0] == 0:
+        best_boxes = torch.argmax(iou_scores).unsqueeze(0)
+
+    return best_boxes

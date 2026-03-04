@@ -5,7 +5,6 @@ import torch
 import torch.nn as nn
 from collections import OrderedDict
 import torch.nn.functional as F
-import matplotlib.pyplot as plt
 
 class DWUnit(nn.Module):
     def __init__(
