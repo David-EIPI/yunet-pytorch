@@ -27,8 +27,8 @@ model.load_state_dict(torch.load(model_weights_file, map_location=net_device, we
 net = model.eval()
 
 # Name of the dataset module
-using_dataset="data.mydataset.dataset"
-#using_dataset="data.dataset"
+#using_dataset="data.mydataset.dataset"
+using_dataset="data.soloface_detection_dataset.dataset"
 
 # Load dataset and supporting callables
 dataset_module = importlib.import_module(using_dataset)

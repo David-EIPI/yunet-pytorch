@@ -61,7 +61,6 @@ def run_prediction(path: str)->dict:
 
     if conf0[top] > 0.9:
         box = torch.flatten(decoded, 0, -2)[top]
-#        print(conf0[top])
         imgsize = np.repeat(img.shape[0:2][::-1], 2)
         box_np = box.cpu().numpy() * imgsize
         box_np = np.asarray(box_np, np.int32)
@@ -69,14 +68,6 @@ def run_prediction(path: str)->dict:
         return { "conf" : conf0[top].item(), "box" : box_np, "image" : img, "time" : (dt2-dt1) }
     else:
         return dict()
-
-
-#import argparse
-#parser = argparse.ArgumentParser(
-#                    prog='predict.py',
-#                    description='Detect face bounding box')
-
-
 
 
 for path in sys.argv[1:]:
